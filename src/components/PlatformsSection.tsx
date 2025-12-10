@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { BookOpen, FileText, Package, Lock } from "lucide-react";
+import { useRef, useState } from "react";
+import { BookOpen, FileText, Package, Lock, Check } from "lucide-react";
 
 const platformCategories = [
   {
@@ -13,6 +13,8 @@ const platformCategories = [
       "DRM-compliant content distribution",
       "Subscription-based digital media services",
     ],
+    color: "from-primary to-primary/60",
+    bgColor: "bg-primary/5",
   },
   {
     icon: FileText,
@@ -23,6 +25,8 @@ const platformCategories = [
       "Library catalog integrations",
       "Global discovery pipelines",
     ],
+    color: "from-accent to-accent/60",
+    bgColor: "bg-accent/5",
   },
   {
     icon: Package,
@@ -33,6 +37,8 @@ const platformCategories = [
       "Data exchanges (FTP, APIs, feeds)",
       "Financial and operational reporting",
     ],
+    color: "from-primary/80 to-accent/80",
+    bgColor: "bg-primary/5",
   },
   {
     icon: Lock,
@@ -43,34 +49,43 @@ const platformCategories = [
       "Monitoring, logging & audit systems",
       "Regulatory and contract compliance",
     ],
+    color: "from-accent/80 to-primary/80",
+    bgColor: "bg-accent/5",
   },
 ];
 
 export const PlatformsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section id="platforms" className="section-padding bg-muted/30 relative overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-3xl" />
+      {/* Background Elements */}
+      <div className="absolute inset-0 mesh-gradient opacity-50" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-3xl" />
 
       <div className="container-wide relative z-10">
         {/* Section Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 border border-primary/20"
+          >
             Solutions
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-4">
-            Our Platforms & Solutions
+          </motion.span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-6">
+            Our Platforms & <span className="gradient-text">Solutions</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             End-to-end digital infrastructure for content organizations
           </p>
         </motion.div>
@@ -80,31 +95,48 @@ export const PlatformsSection = () => {
           {platformCategories.map((category, index) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
               className="group relative"
             >
-              <div className="h-full p-6 rounded-2xl bg-card border border-border/50 shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-1">
+              <div className={`h-full p-7 rounded-3xl glass-card-strong border-2 transition-all duration-500 ${
+                hoveredIndex === index 
+                  ? 'border-accent/50 shadow-glow -translate-y-3' 
+                  : 'border-transparent shadow-lg'
+              }`}>
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors duration-300">
-                  <category.icon className="w-6 h-6 text-accent" />
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:shadow-glow transition-all duration-500`}>
+                  <category.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-heading font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-heading font-semibold text-foreground mb-5 group-hover:text-primary transition-colors duration-300">
                   {category.title}
                 </h3>
 
                 {/* Items */}
-                <ul className="space-y-2.5">
-                  {category.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="w-1 h-1 rounded-full bg-accent mt-2 shrink-0" />
-                      {item}
-                    </li>
+                <ul className="space-y-3">
+                  {category.items.map((item, itemIndex) => (
+                    <motion.li 
+                      key={item} 
+                      initial={{ opacity: 0.7 }}
+                      animate={{ opacity: hoveredIndex === index ? 1 : 0.7 }}
+                      transition={{ duration: 0.3, delay: itemIndex * 0.05 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center shrink-0 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300`}>
+                        <Check className="w-3 h-3 text-primary-foreground" />
+                      </div>
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">{item}</span>
+                    </motion.li>
                   ))}
                 </ul>
+
+                {/* Hover glow effect */}
+                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`} />
               </div>
             </motion.div>
           ))}
