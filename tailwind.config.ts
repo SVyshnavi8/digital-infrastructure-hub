@@ -69,15 +69,19 @@ export default {
       },
       boxShadow: {
         'glow': 'var(--shadow-glow)',
+        'glow-lg': 'var(--shadow-glow-lg)',
         'soft': 'var(--shadow-md)',
         'elevated': 'var(--shadow-lg)',
         'lifted': 'var(--shadow-xl)',
+        '2xl': 'var(--shadow-2xl)',
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-card': 'var(--gradient-card)',
         'gradient-accent': 'var(--gradient-accent)',
         'gradient-subtle': 'var(--gradient-subtle)',
+        'gradient-shine': 'var(--gradient-shine)',
+        'gradient-mesh': 'var(--gradient-mesh)',
         'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
       },
       keyframes: {
