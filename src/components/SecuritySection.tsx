@@ -1,39 +1,57 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, Lock, Eye, FileCheck, Database, Key } from "lucide-react";
+import { Shield, Lock, Eye, FileCheck, Database, Key, ServerCog, Fingerprint } from "lucide-react";
 
 const securityFeatures = [
   {
     icon: Shield,
     title: "Digital Rights Management (DRM)",
-    description: "Industry-standard DRM enforcement protecting publisher content.",
+    description: "Industry-standard DRM enforcement including Adobe ACS4, Readium LCP, and custom watermarking solutions protecting publisher content across all distribution channels.",
   },
   {
     icon: Lock,
     title: "Secure Content Storage",
-    description: "Encrypted storage with controlled access and audit trails.",
+    description: "AES-256 encrypted storage with customer-managed keys, controlled access policies, and comprehensive audit trails for complete content protection and traceability.",
   },
   {
     icon: Eye,
     title: "Data Privacy & Protection",
-    description: "Comprehensive data privacy frameworks and compliance.",
+    description: "Comprehensive data privacy frameworks ensuring GDPR, CCPA, COPPA, and FERPA compliance with automated data handling policies and user consent management.",
   },
   {
     icon: FileCheck,
     title: "Contract Compliance",
-    description: "Full adherence to publisher contracts and licensing terms.",
+    description: "Automated enforcement of publisher contracts and licensing terms including territorial restrictions, lending limits, and usage caps with real-time monitoring.",
   },
   {
     icon: Database,
     title: "Audit Readiness",
-    description: "Financial and content audit-ready systems and reporting.",
+    description: "Financial and content audit-ready systems with SOC 2 Type II certification, detailed reporting, and complete transaction history for regulatory compliance.",
   },
   {
     icon: Key,
-    title: "Identity & Access Governance",
-    description: "Enterprise identity management and encryption protocols.",
+    title: "Identity & Access Management",
+    description: "Enterprise IAM with SSO, SAML 2.0, OAuth 2.0, and multi-factor authentication. Role-based access control and fine-grained permissions across all systems.",
   },
+  {
+    icon: ServerCog,
+    title: "Infrastructure Security",
+    description: "Multi-layer security with WAF, DDoS protection, intrusion detection, and automated threat response. Regular penetration testing and vulnerability assessments.",
+  },
+  {
+    icon: Fingerprint,
+    title: "Content Forensics",
+    description: "Advanced forensic watermarking and content fingerprinting for tracking unauthorized distribution. Real-time piracy detection and takedown workflows.",
+  },
+];
+
+const certifications = [
+  { label: 'SOC 2 Type II', description: 'Certified' },
+  { label: 'ISO 27001', description: 'Compliant' },
+  { label: 'GDPR', description: 'Ready' },
+  { label: 'PCI DSS', description: 'Level 1' },
+  { label: 'HIPAA', description: 'Capable' },
 ];
 
 export const SecuritySection = () => {
@@ -41,7 +59,7 @@ export const SecuritySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="security" className="section-padding bg-primary relative overflow-hidden">
+    <section id="security" className="section-padding relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-accent/90">
       {/* Animated Background */}
       <div className="absolute inset-0">
         {/* Grid Pattern */}
@@ -54,7 +72,7 @@ export const SecuritySection = () => {
             rotate: [0, 5, 0]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-20 right-[15%] w-64 h-64 rounded-full bg-accent/10 blur-3xl"
+          className="absolute top-20 right-[15%] w-64 h-64 rounded-full bg-cyan/15 blur-3xl"
         />
         <motion.div
           animate={{ 
@@ -62,7 +80,7 @@ export const SecuritySection = () => {
             rotate: [0, -5, 0]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-primary-foreground/5 blur-3xl"
+          className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-primary-foreground/10 blur-3xl"
         />
       </div>
       
@@ -86,34 +104,35 @@ export const SecuritySection = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground mb-6">
             Security, Compliance & Trust
           </h2>
-          <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto">
-            iGenie Labs operates to enterprise-grade publishing and data standards
+          <p className="text-lg md:text-xl text-primary-foreground/70 max-w-3xl mx-auto">
+            iGenie Labs operates to the highest enterprise-grade publishing and data standards. 
+            Our security-first architecture protects your content, data, and business operations.
           </p>
         </motion.div>
 
         {/* Security Features Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {securityFeatures.map((feature, index) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative"
             >
-              <div className="h-full p-8 rounded-3xl bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-accent/30 transition-all duration-500">
+              <div className="h-full p-6 rounded-3xl bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-cyan/30 transition-all duration-500">
                 {/* Glow Effect */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-accent/10 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan/10 to-transparent pointer-events-none" />
                 
                 <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center mb-6 shadow-lg group-hover:shadow-glow group-hover:scale-110 transition-all duration-500">
-                    <feature.icon className="w-7 h-7 text-accent-foreground" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan to-accent flex items-center justify-center mb-5 shadow-lg group-hover:shadow-glow group-hover:scale-110 transition-all duration-500">
+                    <feature.icon className="w-6 h-6 text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-heading font-semibold text-primary-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+                  <h3 className="text-lg font-heading font-semibold text-primary-foreground mb-2 group-hover:text-cyan transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-primary-foreground/60 leading-relaxed group-hover:text-primary-foreground/80 transition-colors duration-300">
+                  <p className="text-sm text-primary-foreground/60 leading-relaxed group-hover:text-primary-foreground/80 transition-colors duration-300">
                     {feature.description}
                   </p>
                 </div>
@@ -122,24 +141,28 @@ export const SecuritySection = () => {
           ))}
         </div>
 
-        {/* Trust Badges */}
+        {/* Certifications */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-4"
+          className="mt-16"
         >
-          {['SOC 2 Compliant', 'GDPR Ready', 'ISO 27001', 'PCI DSS'].map((badge, index) => (
-            <motion.div
-              key={badge}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
-              className="px-5 py-2.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium hover:bg-accent/20 hover:border-accent/40 hover:text-primary-foreground transition-all duration-300"
-            >
-              {badge}
-            </motion.div>
-          ))}
+          <p className="text-center text-sm text-primary-foreground/60 mb-8 uppercase tracking-widest">Certifications & Compliance</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {certifications.map((cert, index) => (
+              <motion.div
+                key={cert.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                className="flex flex-col items-center px-6 py-4 rounded-2xl bg-primary-foreground/10 border border-primary-foreground/20 hover:bg-cyan/20 hover:border-cyan/40 transition-all duration-300"
+              >
+                <span className="text-lg font-semibold text-primary-foreground">{cert.label}</span>
+                <span className="text-xs text-primary-foreground/60">{cert.description}</span>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

@@ -1,62 +1,71 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Server, Cloud, ShoppingCart, Sparkles, ArrowUpRight } from "lucide-react";
+import { Server, Cloud, ShoppingCart, Sparkles, ArrowUpRight, Layers, Workflow } from "lucide-react";
 
 const services = [
   {
     icon: Server,
     title: "Digital Platform Engineering",
-    description: "We design, build, and operate enterprise platforms for:",
+    description: "We architect, build, and operate enterprise-grade platforms that power the modern content ecosystem:",
     features: [
-      "Digital content delivery",
-      "Library and institutional distribution",
-      "Publisher metadata and catalog systems",
-      "Subscription-based content services",
+      "End-to-end digital content delivery systems with global CDN integration",
+      "Library and institutional distribution platforms supporting millions of transactions",
+      "Publisher metadata management with ONIX, MARC, and custom schema support",
+      "Subscription-based content services with flexible licensing models",
+      "Real-time inventory and availability systems across multiple channels",
     ],
-    gradient: "from-primary to-primary/70",
-    accent: "bg-primary/10 text-primary",
+    gradient: "from-cyan to-primary",
+    accent: "bg-cyan/10 text-cyan",
   },
   {
     icon: Cloud,
     title: "Enterprise Cloud & Infrastructure",
-    description: "Cloud-native solutions built for scale:",
+    description: "Cloud-native solutions engineered for enterprise scale, security, and reliability:",
     features: [
-      "Cloud-native hosting (Azure, AWS)",
-      "Secure content storage and streaming",
-      "High-availability architectures",
-      "Disaster recovery & business continuity",
+      "Multi-cloud hosting on Azure, AWS, and GCP with intelligent failover",
+      "Secure content storage with AES-256 encryption at rest and in transit",
+      "High-availability architectures with 99.99% uptime SLA guarantees",
+      "Automated disaster recovery and business continuity protocols",
+      "Global edge computing for sub-100ms content delivery worldwide",
     ],
-    gradient: "from-accent to-accent/70",
-    accent: "bg-accent/10 text-accent",
+    gradient: "from-primary to-accent",
+    accent: "bg-primary/10 text-primary",
   },
   {
     icon: ShoppingCart,
     title: "Commerce, Data & Integration",
-    description: "Seamless business operations platforms:",
+    description: "Seamless business operations platforms connecting publishers, libraries, and distributors:",
     features: [
-      "Ordering and transaction platforms",
-      "EDI & system integrations",
-      "Financial reporting & settlements",
-      "Publisher–library interoperability",
+      "Ordering and transaction platforms processing millions of orders annually",
+      "EDI integrations with EDIFACT, X12, and modern REST/GraphQL APIs",
+      "Financial reporting, settlements, and royalty management systems",
+      "Publisher–library interoperability with standardized data exchange",
+      "Real-time analytics dashboards and business intelligence tools",
     ],
-    gradient: "from-primary/80 to-accent/80",
-    accent: "bg-primary/10 text-primary",
+    gradient: "from-accent to-cyan",
+    accent: "bg-accent/10 text-accent",
   },
   {
     icon: Sparkles,
-    title: "Applied AI",
-    description: "AI as a supporting capability to enhance:",
+    title: "Applied AI & Automation",
+    description: "AI as a strategic capability enhancing platform intelligence and operational efficiency:",
     features: [
-      "Search & discovery",
-      "Personalization & recommendations",
-      "Workflow automation",
-      "Operations efficiency",
+      "Advanced search & discovery with semantic understanding and NLP",
+      "Personalization engines driving 40%+ improvement in content engagement",
+      "Intelligent workflow automation reducing manual operations by 60%",
+      "Predictive analytics for demand forecasting and inventory optimization",
+      "Content classification and metadata enrichment using ML models",
     ],
-    note: "AI is one capability within our broader digital platform stack.",
-    gradient: "from-accent/80 to-primary/80",
-    accent: "bg-accent/10 text-accent",
+    note: "AI is integrated as a supporting capability within our broader digital platform stack, enhancing every layer of our solutions.",
+    gradient: "from-cyan via-primary to-accent",
+    accent: "bg-cyan/10 text-cyan",
   },
+];
+
+const additionalCapabilities = [
+  { icon: Layers, label: "Microservices Architecture" },
+  { icon: Workflow, label: "DevOps & CI/CD" },
 ];
 
 export const WhatWeDoSection = () => {
@@ -67,8 +76,8 @@ export const WhatWeDoSection = () => {
     <section id="what-we-do" className="section-padding bg-background relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full pattern-dots opacity-30" />
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-cyan/5 rounded-full blur-3xl" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div className="container-wide relative z-10">
         {/* Section Header */}
@@ -83,15 +92,16 @@ export const WhatWeDoSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-block px-5 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-6 border border-accent/20"
+            className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-cyan/10 to-accent/10 text-primary text-sm font-semibold mb-6 border border-primary/20"
           >
             Our Capabilities
           </motion.span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-6">
             What We <span className="gradient-text">Do</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive digital technology solutions powering the modern content ecosystem
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            Comprehensive digital technology solutions powering the modern content ecosystem with 
+            enterprise-grade security, scalability, and compliance at every layer.
           </p>
         </motion.div>
 
@@ -105,7 +115,7 @@ export const WhatWeDoSection = () => {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group relative"
             >
-              <div className="h-full p-8 md:p-10 rounded-3xl bg-card border border-border/50 hover:border-accent/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+              <div className="h-full p-8 md:p-10 rounded-3xl bg-card border border-border/50 hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                 {/* Gradient Overlay on Hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
                 
@@ -138,8 +148,8 @@ export const WhatWeDoSection = () => {
                       transition={{ duration: 0.4, delay: index * 0.15 + featureIndex * 0.05 + 0.3 }}
                       className="flex items-start gap-3 text-foreground/80"
                     >
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-accent to-primary mt-2 shrink-0" />
-                      <span className="text-sm">{feature}</span>
+                      <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.gradient} mt-2 shrink-0`} />
+                      <span className="text-sm leading-relaxed">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -157,6 +167,25 @@ export const WhatWeDoSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Additional Capabilities */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
+        >
+          <span className="text-sm text-muted-foreground">Also specializing in:</span>
+          {additionalCapabilities.map((cap, index) => (
+            <div 
+              key={cap.label}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border/50 text-sm text-foreground/70"
+            >
+              <cap.icon className="w-4 h-4 text-primary" />
+              {cap.label}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

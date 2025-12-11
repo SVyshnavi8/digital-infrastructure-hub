@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Shield, Cloud, Database, Zap, ChevronDown } from "lucide-react";
+import { ArrowRight, Shield, Cloud, Database, Zap, ChevronDown, Globe, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const FloatingOrb = ({ className, delay = 0 }: { className: string; delay?: number }) => (
@@ -17,20 +17,41 @@ export const HeroSection = () => {
       {/* Animated Background */}
       <div className="absolute inset-0 mesh-gradient" />
       
-      {/* Floating Orbs */}
-      <FloatingOrb className="top-20 right-[10%] w-[500px] h-[500px] bg-accent/20" delay={0.2} />
-      <FloatingOrb className="bottom-20 left-[5%] w-[400px] h-[400px] bg-primary/15" delay={0.4} />
-      <FloatingOrb className="top-1/2 left-1/3 w-[300px] h-[300px] bg-accent/10" delay={0.6} />
+      {/* Floating Orbs - Blue to Purple gradient colors */}
+      <FloatingOrb className="top-20 right-[10%] w-[500px] h-[500px] bg-cyan/15" delay={0.2} />
+      <FloatingOrb className="bottom-20 left-[5%] w-[400px] h-[400px] bg-accent/12" delay={0.4} />
+      <FloatingOrb className="top-1/2 left-1/3 w-[300px] h-[300px] bg-primary/10" delay={0.6} />
       
       {/* Animated Grid */}
       <div className="absolute inset-0 pattern-grid opacity-40 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_30%,#000_40%,transparent_100%)]" />
 
+      {/* Animated Circuit Lines */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg className="absolute w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <motion.path
+            d="M0,50 Q25,30 50,50 T100,50"
+            stroke="url(#gradient1)"
+            strokeWidth="0.2"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          />
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(195, 100%, 50%)" />
+              <stop offset="100%" stopColor="hsl(265, 90%, 60%)" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-accent/40"
+            className={`absolute w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-cyan/50' : 'bg-accent/50'}`}
             initial={{ 
               x: `${Math.random() * 100}%`, 
               y: '100%',
@@ -43,7 +64,7 @@ export const HeroSection = () => {
             transition={{ 
               duration: 8 + Math.random() * 4,
               repeat: Infinity,
-              delay: i * 1.5,
+              delay: i * 1.2,
               ease: "linear"
             }}
           />
@@ -57,14 +78,14 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card-strong mb-10 shine-effect"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card-strong mb-10 shine-effect border border-primary/20"
           >
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+            <span className="flex h-2.5 w-2.5 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-r from-cyan to-accent" />
             </span>
             <span className="text-sm font-medium text-foreground">
-              Enterprise-Grade Technology Solutions
+              Enterprise-Grade Digital Technology Solutions
             </span>
           </motion.div>
 
@@ -91,7 +112,7 @@ export const HeroSection = () => {
             className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed"
           >
             iGenie Labs builds and operates secure, scalable digital platforms for content distribution, 
-            metadata systems, eCommerce, and enterprise cloud infrastructure.
+            metadata systems, eCommerce, DRM enforcement, and enterprise cloud infrastructure.
           </motion.p>
 
           {/* Trust Line */}
@@ -101,7 +122,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.45 }}
             className="text-sm md:text-base text-muted-foreground/70 mb-12 max-w-2xl mx-auto"
           >
-            Supporting publishers, libraries, and digital content organizations with compliant, high-availability technology systems.
+            Trusted by publishers, libraries, and digital content organizations worldwide for compliant, 
+            high-availability technology systems with 99.9% uptime guarantee.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -128,10 +150,12 @@ export const HeroSection = () => {
             className="flex flex-wrap items-center justify-center gap-4"
           >
             {[
-              { icon: Cloud, label: "Cloud Infrastructure" },
-              { icon: Database, label: "Data Platforms" },
-              { icon: Shield, label: "DRM & Security" },
-              { icon: Zap, label: "High Availability" },
+              { icon: Cloud, label: "Cloud Infrastructure", color: "from-cyan to-primary" },
+              { icon: Database, label: "Data Platforms", color: "from-primary to-accent" },
+              { icon: Shield, label: "DRM & Security", color: "from-accent to-cyan" },
+              { icon: Zap, label: "High Availability", color: "from-cyan to-accent" },
+              { icon: Globe, label: "Global Distribution", color: "from-primary to-cyan" },
+              { icon: Lock, label: "Compliance Ready", color: "from-accent to-primary" },
             ].map((item, index) => (
               <motion.div
                 key={item.label}
@@ -139,9 +163,9 @@ export const HeroSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -2 }}
-                className="flex items-center gap-3 px-5 py-3 rounded-2xl glass-card-strong hover:shadow-glow transition-all duration-300 cursor-default"
+                className="flex items-center gap-3 px-5 py-3 rounded-2xl glass-card-strong hover:shadow-glow transition-all duration-300 cursor-default border border-border/50 hover:border-primary/30"
               >
-                <div className="w-8 h-8 rounded-lg bg-gradient-hero flex items-center justify-center">
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
                   <item.icon className="w-4 h-4 text-primary-foreground" />
                 </div>
                 <span className="text-sm font-medium text-foreground">{item.label}</span>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "What We Do", href: "#what-we-do" },
@@ -21,7 +22,6 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       
-      // Update active section based on scroll position
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -41,9 +41,7 @@ export const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "py-2"
-          : "py-4"
+        isScrolled ? "py-2" : "py-4"
       }`}
     >
       <div className="container-wide">
@@ -55,14 +53,15 @@ export const Navbar = () => {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <motion.div 
-              whileHover={{ scale: 1.05, rotate: 5 }}
-              className="w-10 h-10 rounded-xl bg-gradient-hero flex items-center justify-center shadow-lg group-hover:shadow-glow transition-shadow duration-300"
+              whileHover={{ scale: 1.05 }}
+              className="relative"
             >
-              <span className="text-primary-foreground font-heading font-bold text-lg">iG</span>
+              <img 
+                src={logo} 
+                alt="iGenie Labs" 
+                className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:logo-glow"
+              />
             </motion.div>
-            <span className="font-heading font-semibold text-xl text-foreground hidden sm:block">
-              iGenie Labs
-            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -81,7 +80,7 @@ export const Navbar = () => {
                 {activeSection === item.href.substring(1) && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute inset-0 bg-primary/5 rounded-xl -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl -z-10"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -155,7 +154,7 @@ export const Navbar = () => {
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                     className={`block px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
                       activeSection === item.href.substring(1)
-                        ? "bg-primary/10 text-primary"
+                        ? "bg-gradient-to-r from-primary/10 to-accent/10 text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                     }`}
                   >

@@ -43,6 +43,10 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        cyan: {
+          DEFAULT: "hsl(var(--cyan))",
+          foreground: "hsl(var(--cyan-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -70,6 +74,7 @@ export default {
       boxShadow: {
         'glow': 'var(--shadow-glow)',
         'glow-lg': 'var(--shadow-glow-lg)',
+        'glow-purple': 'var(--shadow-glow-purple)',
         'soft': 'var(--shadow-md)',
         'elevated': 'var(--shadow-lg)',
         'lifted': 'var(--shadow-xl)',
